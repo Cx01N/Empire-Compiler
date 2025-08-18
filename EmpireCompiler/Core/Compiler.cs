@@ -279,8 +279,23 @@ namespace EmpireCompiler.Core
 
         private static string ConfuserExOptions { get; set; } = @"
 <project baseDir=""{0}"" outputDir=""{1}"" xmlns=""http://confuser.codeplex.com"">
-  <rule pattern=""true"" preset=""minimum"" inherit=""false"" />
-  <module path=""{2}"" />
+ <module path=""{2}"">
+    <rule preset=""none"" pattern=""true"" inherit=""false"">
+        <protection id=""anti debug"" />
+        <protection id=""anti dump"" />
+        <protection id=""anti ildasm"" />
+        <protection id=""anti tamper"" />
+        <protection id=""constants"" />
+        <protection id=""ctrl flow"" />
+        <protection id=""invalid metadata"" />
+        <protection id=""ref proxy"" />
+        <protection id=""rename"" />
+        <protection id=""resources"" />
+    </rule>
+    <rule preset=""none"" pattern=""namespace(''Sharpire.Comms'') and match-name(''Program|Main$'')"">
+        <protection id=""rename"" action=""remove"" />
+    </rule>
+  </module>
 </project>
 ";
 
